@@ -13,9 +13,13 @@ fi
 cd ${BUILD_DIR}
 
 if [[ ! -f "${CLEAN_FILES}" ]]; then
-  echo "Could not find .slug-post-clean file - exiting"
+  echo "Could not find .slug-post-clean file in ${BUILD_DIR} - exiting"
   exit 1
 fi
+
+echo "Current working directory: $(pwd)"
+echo "Contents of .slug-post-clean:"
+cat ${CLEAN_FILES}
 
 while read file; do
   [[ ! -n "${file}" ]] && continue
@@ -30,3 +34,5 @@ while read file; do
     echo "Location ${file} not found - ignoring"
   fi
 done <${CLEAN_FILES}
+
+echo "Finished slug cleanup."
